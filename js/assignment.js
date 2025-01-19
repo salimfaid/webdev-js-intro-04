@@ -1,30 +1,25 @@
 "use strict";
 
-// Create your references to the html elements here
-const ageInputEl = document.getElementById("age-input")
-const submissionBtn = document.getElementById("submission-btn");
+// 1. Create an immutable variable that stores the reference to the paragraph with id="response".
+const responseParagraph = document.getElementById('response');
 
-// create a mutable variable called age and do not assign it a value.
+// 2. Create a mutable variable called age, but do not assign it a value.
+let age;
 
-
+// 3. Write the conditional logic inside the checkAgeAndRespond function.
 function checkAgeAndRespond() {
-    age = parseInt(ageInputEl.value);
+    // Retrieve the value from the input field and parse it as an integer
+    age = parseInt(document.getElementById('age-input').value);
     
-    // Write your code below
-
-}
-
-
-submissionBtn.addEventListener("click", function () {
-    checkAgeAndRespond();
-});
-
-
-function validateInput(event) {
-    const invalidCharacters = ["e", "E", "-", "+"];
-    if (invalidCharacters.includes(event.key)) {
-        event.preventDefault();
+    // Check the age and display the corresponding message
+    if (age >= 21) {
+        responseParagraph.textContent = "You can vote and purchase alcohol.";
+    } else if (age >= 18) {
+        responseParagraph.textContent = "You can vote, but you cannot purchase alcohol.";
+    } else {
+        responseParagraph.textContent = "You cannot vote and you cannot purchase alcohol.";
     }
 }
 
-ageInputEl.addEventListener("keydown", validateInput);
+// 4. Add an event listener to the "Submit" button to call checkAgeAndRespond function on click
+document.getElementById('submission-btn').addEventListener('click', checkAgeAndRespond);
